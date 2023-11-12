@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query'
 import { fetchPokemonGeneration } from '../apis/pokemon'
 
 export default function PokemonList() {
-  const { isPending, error, data } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ['generation'],
     queryFn: () => fetchPokemonGeneration(1),
   })
 
-  if (isPending) {
+  if (isLoading) {
     return 'Loading...'
   }
 
@@ -17,7 +17,7 @@ export default function PokemonList() {
 
   return (
     <>
-      <h2>Pokémon in {data.region}:</h2>
+      <h2>Pokémon in {data && data.region}:</h2>
       <ul>{data && data.pokemon.map((p) => <li key={p.id}>{p.name}</li>)}</ul>
     </>
   )

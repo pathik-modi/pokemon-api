@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchPokemonGeneration } from '../apis/pokemon'
+import LoadingSpinner from './LoadingSpinner'
+import { Link } from 'react-router-dom'
 
 export default function PokemonList() {
   const { isLoading, error, data } = useQuery({
@@ -8,7 +10,7 @@ export default function PokemonList() {
   })
 
   if (isLoading) {
-    return 'Loading...'
+    return LoadingSpinner()
   }
 
   if (error) {
@@ -18,7 +20,14 @@ export default function PokemonList() {
   return (
     <>
       <h2>Pokémon in {data && data.region}:</h2>
-      <ul>{data && data.pokemon.map((p) => <li key={p.id}>{p.name}</li>)}</ul>
+      <ul>
+        {data &&
+          data.pokemon.map((p) => (
+            <li key={p.id}>
+              <Link to={`/pokemon/${p.name}`}>{p.name}</Link>
+            </li>
+          ))}
+      </ul>
     </>
   )
 }

@@ -24,9 +24,13 @@ export default function PokemonDetail() {
     return 'An error has occurred: ' + error.message
   }
 
+  console.log(pokemon)
+
   return (
     <div>
       <h1>{name}</h1>
+      <p>Weight: {pokemon && pokemon.weight / 10} kg</p>
+      <p>Height: {pokemon && pokemon.height / 10} m</p>
       <h2>Types: </h2>
       {pokemon &&
         pokemon.types.map(({ type, slot }) => <p key={slot}>{type.name}</p>)}

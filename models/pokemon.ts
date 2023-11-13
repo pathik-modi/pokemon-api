@@ -11,6 +11,8 @@ export interface PartialPokemon {
 
 export interface Pokemon {
   name: string
+  weight: number
+  height: number
   id: number
   sprites: {
     front_default: string
